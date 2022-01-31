@@ -3,7 +3,7 @@
 struct node
 {
     int data;
-    struct node* link;
+    struct node *link;
 };
 struct node* head = NULL;
 
@@ -42,13 +42,21 @@ void insend()
     new = malloc(sizeof(struct node));
     printf("\nEnter data : ");
     scanf("%d",&new->data);
-    new->link = NULL;
-    temp = head;
-    while(temp->link!=NULL)
+    if(head == NULL)
     {
-        temp = temp->link;
+        new->link = NULL;
+        head = new;
     }
-    temp->link = new;
+    else
+    {
+        new->link = NULL;
+        temp = head;
+        while(temp->link!=NULL)
+        {
+            temp = temp->link;
+        }
+        temp->link = new;
+    }
 }
 
 void inspos()
@@ -56,18 +64,28 @@ void inspos()
     struct node *new, *temp;
     int pos, i=1;
     new = malloc(sizeof(struct node));
-    printf("\nEnter position : ");
-    scanf("%d", &pos);
-    printf("Enter data : ");
-    scanf("%d", &new->data);
-    temp = head;
-    while(i!=pos-1)
+    if(head == NULL)
     {
-        temp = temp->link;
-        i++;
+        printf("\nList is empty\nEnter 1st position : ");
+        scanf("%d", &new->data);
+        new->link = NULL;
+        head = new;
     }
-    new->link = temp->link;
-    temp->link = new;
+    else
+    {
+        printf("\nEnter position : ");
+        scanf("%d", &pos);
+        printf("Enter data : ");
+        scanf("%d", &new->data);
+        temp = head;
+        while(i!=pos-1)
+        {
+            temp = temp->link;
+            i++;
+        }
+        new->link = temp->link;
+        temp->link = new;
+    }
 }
 
 void delbeg()
