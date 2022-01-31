@@ -23,14 +23,20 @@ void  insrear(int data)
 }
 void insfront(int data)
 {
-    if(front<=0)
+    if(front==-1)
     {
-        printf("Can't Insert\n");
+        front=0;
+        rear=0;
+        queue[front]=data;
+    }
+    else if(front>0)
+    {
+        front--;
+        queue[front]=data;
     }
     else
     {
-        front--;
-        queue[front] = data;
+          printf("Not possible!!");
     }
 }
 void delfront()

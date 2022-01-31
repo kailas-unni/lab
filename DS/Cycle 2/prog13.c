@@ -6,6 +6,7 @@ struct node
     struct node *link;
 };
 struct node* head = NULL;
+int count=0;
 
 void display()
 {
@@ -33,7 +34,8 @@ void insbeg()
     printf("\nEnter data : ");
     scanf("%d",&new->data);
     new->link = head;
-    head = new;     
+    head = new;   
+    count++;  
 }
 
 void insend()
@@ -57,6 +59,7 @@ void insend()
         }
         temp->link = new;
     }
+    count++;
 }
 
 void inspos()
@@ -75,6 +78,11 @@ void inspos()
     {
         printf("\nEnter position : ");
         scanf("%d", &pos);
+        if(pos-1>count || pos<1)
+        {
+            printf("\nEnter a valid position!!");
+            return;
+        }
         printf("Enter data : ");
         scanf("%d", &new->data);
         temp = head;
@@ -86,6 +94,7 @@ void inspos()
         new->link = temp->link;
         temp->link = new;
     }
+    count++;
 }
 
 void delbeg()
@@ -100,6 +109,7 @@ void delbeg()
         temp = head;
         head = head->link;
         free(temp);
+        count--;
     }
 }
 
@@ -112,6 +122,11 @@ void delend()
     }
     else
     {
+        if(count==1)
+        {
+            delbeg();
+            return;
+        }
         temp = head;
         while(temp->link!=NULL)
         {
@@ -120,6 +135,7 @@ void delend()
         }
         prev->link = NULL;
         free(temp);
+        count--;
     }
 }
 
@@ -135,6 +151,16 @@ void delpos()
     {
         printf("\nEnter position : ");
         scanf("%d", &pos);
+        if(pos>count || pos<1)
+        {
+            printf("\nEnter a valid position!!");
+            return;
+        }
+        if(pos==1)
+        {
+            delbeg();
+            return;
+        }
         temp = head; 
         while(i!=pos)
         {
@@ -144,6 +170,7 @@ void delpos()
         }
         prev->link = temp->link;
         free(temp);
+        count--;
     }
 }
 
