@@ -117,8 +117,8 @@ void delpos()
     {
         printf("\nEnter position : ");
         scanf("%d", &pos);
-        temp = head;
-        while(i!=pos-1)
+        temp = head; 
+        while(i!=pos)
         {
             prev = temp;
             temp = temp->link;
