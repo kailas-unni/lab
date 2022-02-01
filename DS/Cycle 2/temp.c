@@ -67,25 +67,26 @@ void enqueue_front(int x)
 {
     if(front==-1)
     {
+        //printf("Not possible!!");
         front=0;
         rear=0;
         dequeue[front]=x;
     }
-    else if(front>0)
+    else if(front>=0)
     {
         front--;
         dequeue[front]=x;
     }
     else
     {
-          printf("Not possible!!");
+         printf("Not possible!!");
     }
     display();
 }
 
 void enqueue_rear(int x)
 {
-    if(rear=N-1)
+    if(rear==N-1)
     {
         printf("Not possible!!");
     }
@@ -94,6 +95,7 @@ void enqueue_rear(int x)
         if(rear==-1)
         {
             rear=0;
+            dequeue[rear]=x;
         }
         else
         {
@@ -171,7 +173,7 @@ void display()
     else
     {
         printf("\nThe queue elements are:\n");
-        if(rear>front)
+        if(rear>=front)
         {
             for(i=front;i<=rear;i++)
             {
@@ -180,11 +182,11 @@ void display()
         }
         else
         {
-            for(i=0;i<rear;i++)
+            for(i=0;i<=rear;i++)
             {
                 printf("%d\t",dequeue[i]);
             }
-            for(i=rear;i<=front;i++)
+            for(i=front;i<N;i++)
             {
                 printf("%d\t",dequeue[i]);
             }

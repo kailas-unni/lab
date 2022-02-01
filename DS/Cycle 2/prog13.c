@@ -83,6 +83,11 @@ void inspos()
             printf("\nEnter a valid position!!");
             return;
         }
+        if(pos==1)
+        {
+            insbeg();
+            return;
+        }
         printf("Enter data : ");
         scanf("%d", &new->data);
         temp = head;
