@@ -1,25 +1,56 @@
 import java.io.*;
-import java.util.*;
 
-class prg5
-{
-    public static void main(String args[]) throws IOException
-    {
-        String s;
-        int a[]= new int[100],i=0,sum=0;
+class AgeNotWithInRangeException extends Exception {
+    public String toString() {
+        return ("Age is not between 15 and 21. please ReEnter the Age");
+    }
+}
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter a line of integers");
-        s = br.readLine();
-        StringTokenizer st = new StringTokenizer(s);
-        System.out.println("The integers entered are");
-        while(st.hasMoreTokens())
-        {
-            a[i] = Integer.parseInt(st.nextToken());
-            sum += a[i];
-            System.out.println(a[i]);
-            i++;
+class Student {
+    int roll, age;
+    String name, course;
+
+    Student() {
+        roll = 0;
+        name = null;
+        age = 0;
+        course = null;
+    }
+
+    Student(int r, String n, int a, String c) {
+        roll = r;
+        course = c;
+        name = n;
+        try {
+            if (a >= 15 && a <= 21)
+                age = a;
+            else
+                throw new AgeNotWithInRangeException();
+        } catch (AgeNotWithInRangeException e1) {
+            System.out.println(e1);
         }
-        System.out.println("Sum of the given integers : "+sum);
+    }
+
+    void display() {
+        System.out.println("roll Name Age Course");
+        System.out.println("---------------------");
+        System.out.println(roll + " " + name + " " + age + " " + course);
+    }
+}
+
+class StudentMain {
+    public static void main(String args[]) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.print("Enter roll number: ");
+        int roll = Integer.parseInt(br.readLine());
+        System.out.print("\nEnter name: ");
+        String name = br.readLine();
+        System.out.print("\nEnter age: ");
+        int age = Integer.parseInt(br.readLine());
+        System.out.print("\nEnter course: ");
+        String course = br.readLine();
+        Student s = new Student(roll, name, age, course);
+        s.display();
     }
 }
